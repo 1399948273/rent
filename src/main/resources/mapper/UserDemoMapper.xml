@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--mapper映射-->
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.UserDemoMapper">
+
+    <resultMap id="user" type="com.gameloft9.demo.dataaccess.model.system.UserDemo">
+        <id column="id" property="id" jdbcType="INTEGER"></id>
+        <result column="username" property="username" jdbcType="VARCHAR"></result>
+        <result column="sex" property="sex" jdbcType="VARCHAR"></result>
+        <result column="age" property="age" jdbcType="INTEGER"></result>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, username, sex, age
+    </sql>
+
+    <select id="listUserDemo" resultMap="user">
+        select
+        <include refid="Base_Column_List"/>
+        from userdemo u
+        where 1=1
+        <if test="username != null and username != ''">
+            and u.username = #{username}
+        </if>
+        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
+    </select>
+
+    <select id="countUserdemo" resultType="java.lang.Integer">
+        select
+        count(0)
+        from userdemo u
+        where 1=1
+        <if test="username != null and username != ''">
+            and u.username = #{username}
+        </if>
+    </select>
+
+    <insert id="adduserdemo" parameterType="com.gameloft9.demo.dataaccess.model.system.UserDemo">
+        insert into userdemo
+        (username, sex, age)
+        values
+        (#{username}, #{sex}, #{age});
+    </insert>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.gameloft9.demo.dataaccess.model.system.UserDemo">
+        select
+        username, sex, age
+        from userdemo
+        where id = #{id}
+    </select>
+
+    <update id="updateuser" parameterType="com.gameloft9.demo.dataaccess.model.system.UserDemo">
+       update userdemo
+       set
+       username = #{username},
+       sex = #{sex},
+       age = #{age}
+       where
+       id = #{id}
+    </update>
+
+    <delete id="deleteUserDemo" parameterType="java.lang.Integer">
+        delete from userdemo
+        where
+        id = #{id}
+    </delete>
+
+</mapper>
