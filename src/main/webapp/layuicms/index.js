@@ -328,7 +328,7 @@ layui.config({//基础目录
         }
         //渲染顶部窗口
         tab.tabMove();
-    })
+    });
 
     //打赏
     $('.dashang').click(function () {

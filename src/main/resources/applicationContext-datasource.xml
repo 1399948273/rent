@@ -27,7 +27,7 @@
 		</bean>
 
 		<!--mapper自动扫描配置-->
-		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 			<property name="basePackage" value="com.gameloft9.demo.dataaccess.dao" />
 			<!-- 这里不要定义sqlSessionFactory, 定义了会导致properties文件无法加载 -->
 		</bean>
